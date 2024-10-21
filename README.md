@@ -1,4 +1,4 @@
-Sketch coursework (2023, slightly edited)
+Sketch coursework (2023)
 
 This project is primarily focused on "compressing" a .pgm file (greyscale image) into a custom .sk file format (detailed below).  
 Backwards conversion from .sk -> .pgm is also supported.  
