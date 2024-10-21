@@ -16,14 +16,14 @@ Based on a 200x200 (40 KiB) bands.pgm and fractal.pgm file to compress:
 1D run-length encoding: bands.sk 16.4 KiB, fractal.sk 129.7 KiB  
 Writing pixel by pixel: bands.sk ~300 KiB, fractal.sk ~300 KiB
 
-As you may notice, the compression isn't very good for fractal, in fact coming out larger than the original image. This is due to the nature of the .sketch file format, only being able to have signed 6-bit operand per byte. This means it takes 5+2 bytes to specify a change in 32-bit RGBA colour, and 4+1 bytes to specify a co-ordinate above (31, 31). 
+As you may notice, the compression isn't very good for fractal, in fact coming out larger than the original image. This is due to the nature of the .sketch file format, only being able to have a 6-bit operand per byte. This means it takes 5+2 bytes to specify a change in 32-bit RGBA colour, and 4+1 bytes to specify a co-ordinate above (31, 31). 
 
 The .sketch file viewer stores a current position, target position, the current drawing tool being used and an (unsigned) accumulator. Each byte is 1 command, consisting of a 2-bit opcode and a 6-bit operand. 
 
 The commands are as follows:  
-DX: Increase target position x by signed operand value (-32 to +31), set current position to target position  
-DY: Incrase target position y by signed operand value (-32 to +31)  
-DATA: Left shift accumulator by 6 bits, add unsigned operand value to accumulator  
+DX: Increase target position x by signed operand (-32 to +31), set current position to target position  
+DY: Incrase target position y by signed operand (-32 to +31)  
+DATA: Left shift accumulator by 6 bits, add unsigned operand to accumulator  
 TOOL: Set drawing tool
 whenever a command is called, the accumulator value is then reset to 0.
 
