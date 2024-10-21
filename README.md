@@ -21,17 +21,17 @@ As you may notice, the compression isn't very good for fractal, in fact coming o
 The .sketch file viewer stores a current position, target position, the current drawing tool being used and an (unsigned) accumulator. Each byte is 1 command, consisting of a 2-bit opcode and a 6-bit operand. 
 
 The commands are as follows:  
-DX: Increase target position x by signed operand (-32 to +31), set current position to target position  
-DY: Incrase target position y by signed operand (-31 to +31)  
-DATA: Left shift accumulator by 6 bits, add operand to accumulator  
+DX: Increase target position x by signed operand value (-32 to +31), set current position to target position  
+DY: Incrase target position y by signed operand value (-32 to +31)  
+DATA: Left shift accumulator by 6 bits, add unsigned operand value to accumulator  
 TOOL: Set drawing tool
-whenever a command is called, the accumulator value is reset to 0.
+whenever a command is called, the accumulator value is then reset to 0.
 
 Drawing Tools:   
 NONE: do nothing  
 LINE: draw a line from current position to target position whenever DX is called  
 BLOCK: draw a rectangle from current position to target position whenever DX is called  
-COLOUR: Set drawing colour (32-bit RGBA) to the accumulator  
+COLOUR: Set drawing colour (32-bit RGBA) to the accumulator, defaults to 0x0. 
 TARGETX: Set target position x to the accumulator  
 TARGETY: Set target position y to the accumulator
 
